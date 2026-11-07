@@ -22,10 +22,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(
-                                "/workspace",
-                                "/workspace/**",
-                                "/booking",
-                                "/booking/**"
+                                "/offices",
+                                "/offices/**"
                         )
                         .authenticated()
                         .anyRequest().authenticated()
