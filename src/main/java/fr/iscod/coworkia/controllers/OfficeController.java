@@ -41,7 +41,6 @@ public class OfficeController {
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public void update(@PathVariable UUID id, @RequestBody Office office) {
-        officeService.findById(id);
         officeService.update(id, office);
     }
 
@@ -49,7 +48,6 @@ public class OfficeController {
     @PatchMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public void partialUpdate(@PathVariable UUID id, @RequestBody Map<String, Object> update) {
-        officeService.findById(id);
         officeService.partialUpdate(id, update);
     }
 

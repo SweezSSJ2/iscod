@@ -23,7 +23,9 @@ public class SecurityConfiguration {
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(
                                 "/offices",
-                                "/offices/**"
+                                "/offices/**",
+                                "/workspaces",
+                                "/workspaces/**"
                         )
                         .authenticated()
                         .anyRequest().authenticated()

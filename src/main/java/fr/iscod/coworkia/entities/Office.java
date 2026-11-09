@@ -2,6 +2,8 @@ package fr.iscod.coworkia.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+import java.util.HashSet;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +15,9 @@ public class Office {
     private UUID id;
     private String name;
     private String address;
+
+    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
+    private Set<Workspace> workspaces = new HashSet<Workspace>();
 
     public UUID getId() {
         return id;
@@ -36,5 +41,13 @@ public class Office {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<Workspace> getWorkspaces() {
+        return workspaces;
+    }
+
+    public void setWorkspaces(Set<Workspace> workspaces) {
+        this.workspaces = workspaces;
     }
 }

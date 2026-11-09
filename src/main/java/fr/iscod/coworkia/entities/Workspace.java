@@ -12,7 +12,7 @@ public class Workspace {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "office_id", referencedColumnName = "id")
     private Office office;
     private String code;

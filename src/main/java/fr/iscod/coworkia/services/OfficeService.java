@@ -29,11 +29,13 @@ public class OfficeService {
     }
 
     public void update(UUID id, Office office) {
+        findById(id);
         office.setId(id);
         officeRepository.save(office);
     }
 
     public void partialUpdate(UUID id, Map<String, Object> updates) {
+        findById(id);
 
         Office update = officeRepository.findById(id).get();
 
@@ -52,6 +54,7 @@ public class OfficeService {
     }
 
     public void delete(UUID id) {
+        findById(id);
         officeRepository.deleteById(id);
     }
 }
