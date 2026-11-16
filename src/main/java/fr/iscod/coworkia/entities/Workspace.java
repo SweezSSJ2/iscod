@@ -2,6 +2,8 @@ package fr.iscod.coworkia.entities;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +20,9 @@ public class Workspace {
     private String code;
     private String name;
     private Integer capacity;
+
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
+    private Set<Computer> computers = new HashSet<>();
 
     public UUID getId() {
         return id;

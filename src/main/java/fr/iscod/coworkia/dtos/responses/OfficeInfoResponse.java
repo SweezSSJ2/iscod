@@ -7,8 +7,8 @@ public record OfficeInfoResponse(
         UUID id,
         String name,
         String address,
-        List<WorkspaceSummary> workspaces) {
-    public record WorkspaceSummary(
+        List<WorkspaceInfos> workspaces) {
+    public record WorkspaceInfos(
             UUID id,
             String code,
             String name,

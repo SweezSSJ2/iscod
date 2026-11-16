@@ -122,3 +122,59 @@ create table user (id uuid not null, email varchar(255), first_name varchar(255)
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
 Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
 alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-10 20:52:57.054035+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-10 20:52:57.057764+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-11 15:56:46.854776+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-11 15:56:46.858486+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-11 19:41:08.353189+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-11 19:41:08.356854+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-11 19:41:56.993264+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-11 19:41:56.997159+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-14 19:39:38.067579+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-14 19:39:38.072243+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-14 19:43:28.602994+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-14 19:43:28.605028+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]
+2026-11-14 20:33:51.379619+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; attendu "identifier"
+Syntax error in SQL statement "create table [*]user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id uuid not null, email varchar(255), first_name varchar(255), last_name varchar(255), password varchar(255), role varchar(255), primary key (id)) [42001-240]
+2026-11-14 20:33:51.382903+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Erreur de syntaxe dans l'instruction SQL "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; attendu "identifier"
+Syntax error in SQL statement "alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references [*]user"; expected "identifier"; SQL statement:
+alter table if exists booking add constraint FKkgseyy7t56x7lkjgu3wah5s3t foreign key (user_id) references user [42001-240]

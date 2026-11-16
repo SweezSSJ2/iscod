@@ -34,8 +34,8 @@ public class OfficeMapper {
     }
 
     public OfficeInfoResponse toInfoResponse(Office office) {
-        List<OfficeInfoResponse.WorkspaceSummary> workspaces = office.getWorkspaces().stream()
-                .map(w -> new OfficeInfoResponse.WorkspaceSummary(
+        List<OfficeInfoResponse.WorkspaceInfos> workspaces = office.getWorkspaces().stream()
+                .map(w -> new OfficeInfoResponse.WorkspaceInfos(
                         w.getId(), w.getCode(), w.getName(), w.getCapacity()))
                 .toList();
         return new OfficeInfoResponse(office.getId(), office.getName(), office.getAddress(), workspaces);
