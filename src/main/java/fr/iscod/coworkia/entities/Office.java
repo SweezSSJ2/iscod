@@ -16,8 +16,8 @@ public class Office {
     private String name;
     private String address;
 
-    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
-    private Set<Workspace> workspaces = new HashSet<Workspace>();
+    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Workspace> workspaces = new HashSet<>();
 
     public UUID getId() {
         return id;

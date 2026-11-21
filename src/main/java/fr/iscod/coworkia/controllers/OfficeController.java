@@ -4,31 +4,32 @@ import fr.iscod.coworkia.dtos.requests.OfficePatchRequest;
 import fr.iscod.coworkia.dtos.requests.OfficeRequest;
 import fr.iscod.coworkia.dtos.responses.OfficeInfoResponse;
 import fr.iscod.coworkia.dtos.responses.OfficeResponse;
-import fr.iscod.coworkia.entities.Office;
 import fr.iscod.coworkia.services.OfficeService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/offices")
 public class OfficeController {
 
-    @Autowired
-    private OfficeService officeService;
+    private final OfficeService officeService;
 
-    @Operation(summary = "Récupérer un espace de coworking")
+    public OfficeController(OfficeService officeService) {
+        this.officeService = officeService;
+    }
+
+    @Operation(summary = "Récupérer un espace de coworking avec ses zones")
     @GetMapping("/{id}")
     public OfficeInfoResponse findById(@PathVariable UUID id) {
         return officeService.findById(id);
     }
 
-    @Operation(summary = "Récupérer tout les espaces de coworking")
+    @Operation(summary = "Lister les espaces de coworking")
     @GetMapping
     public List<OfficeResponse> findAll() {
         return officeService.findAll();
@@ -36,28 +37,26 @@ public class OfficeController {
 
     @Operation(summary = "Créer un espace de coworking")
     @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
-    public UUID create(@RequestBody OfficeRequest office) {
-        return officeService.create(office);
+    @ResponseStatus(HttpStatus.CREATED)
+    public UUID create(@Valid @RequestBody OfficeRequest request) {
+        return officeService.create(request);
     }
 
-    @Operation(summary = "Modifier les infos d'un espace de coworking")
+    @Operation(summary = "Remplacer un espace de coworking")
     @PutMapping("/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public void update(@PathVariable UUID id, @RequestBody OfficeRequest office) {
-        officeService.update(id, office);
+    public void update(@PathVariable UUID id, @Valid @RequestBody OfficeRequest request) {
+        officeService.update(id, request);
     }
 
-    @Operation(summary = "Modifier certaines infos d'un espace de coworking")
+    @Operation(summary = "Modifier partiellement un espace de coworking")
     @PatchMapping("/{id}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public void partialUpdate(@PathVariable UUID id, @RequestBody OfficePatchRequest update) {
-        officeService.partialUpdate(id, update);
+    public void partialUpdate(@PathVariable UUID id, @Valid @RequestBody OfficePatchRequest request) {
+        officeService.partialUpdate(id, request);
     }
 
     @Operation(summary = "Supprimer un espace de coworking")
     @DeleteMapping("/{id}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
         officeService.delete(id);
     }

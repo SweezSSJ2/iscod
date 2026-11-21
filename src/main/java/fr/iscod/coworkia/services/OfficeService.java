@@ -8,7 +8,7 @@ import fr.iscod.coworkia.dtos.responses.OfficeResponse;
 import fr.iscod.coworkia.entities.Office;
 import fr.iscod.coworkia.exceptions.ResourceNotFoundException;
 import fr.iscod.coworkia.interfaces.repositories.OfficeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +17,7 @@ import java.util.UUID;
 @Service
 public class OfficeService {
 
-    @Autowired
-    private OfficeRepository officeRepository;
+    private final OfficeRepository officeRepository;
     private final OfficeMapper officeMapper;
 
     public OfficeService(OfficeRepository officeRepository, OfficeMapper officeMapper) {
@@ -34,23 +33,28 @@ public class OfficeService {
         return officeRepository.findAll().stream().map(officeMapper::toResponse).toList();
     }
 
+    @Transactional
     public UUID create(OfficeRequest request) {
         return officeRepository.save(officeMapper.toEntity(request)).getId();
     }
 
+    @Transactional
     public void update(UUID id, OfficeRequest request) {
         officeMapper.applyUpdate(getOrThrow(id), request);
     }
 
+    @Transactional
     public void partialUpdate(UUID id, OfficePatchRequest request) {
         officeMapper.applyPatch(getOrThrow(id), request);
     }
 
+    @Transactional
     public void delete(UUID id) {
         officeRepository.delete(getOrThrow(id));
     }
 
     private Office getOrThrow(UUID id) {
-        return officeRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return officeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Office", id));
     }
 }
