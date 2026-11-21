@@ -7,21 +7,27 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "workspace")
+@Table(name = "workspace", uniqueConstraints = @UniqueConstraint(columnNames = {"office_id", "code"}))
 public class Workspace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "office_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "office_id", nullable = false)
     private Office office;
+
+    @Column(nullable = false)
     private String code;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private Integer capacity;
 
-    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Computer> computers = new HashSet<>();
 
     public UUID getId() {
@@ -62,5 +68,13 @@ public class Workspace {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public Set<Computer> getComputers() {
+        return computers;
+    }
+
+    public void setComputers(Set<Computer> computers) {
+        this.computers = computers;
     }
 }
