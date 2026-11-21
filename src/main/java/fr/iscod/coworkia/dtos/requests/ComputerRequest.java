@@ -1,9 +1,11 @@
 package fr.iscod.coworkia.dtos.requests;
 
-import fr.iscod.coworkia.entities.Workspace;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.UUID;
 
 public record ComputerRequest(
         @NotBlank String name,
-        @NotBlank Workspace workspace
+        @NotNull UUID workspaceId
 ) {}

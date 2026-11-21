@@ -5,9 +5,11 @@ import fr.iscod.coworkia.dtos.requests.ComputerPatchRequest;
 import fr.iscod.coworkia.dtos.requests.ComputerRequest;
 import fr.iscod.coworkia.dtos.responses.ComputerResponse;
 import fr.iscod.coworkia.entities.Computer;
+import fr.iscod.coworkia.entities.Workspace;
 import fr.iscod.coworkia.exceptions.ResourceNotFoundException;
 import fr.iscod.coworkia.interfaces.repositories.ComputerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import fr.iscod.coworkia.interfaces.repositories.WorkspaceRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,40 +18,63 @@ import java.util.UUID;
 @Service
 public class ComputerService {
 
-    @Autowired
-    private ComputerRepository computerRepository;
+    private final ComputerRepository computerRepository;
+    private final WorkspaceRepository workspaceRepository;
     private final ComputerMapper computerMapper;
 
-    public ComputerService(ComputerRepository computerRepository, ComputerMapper computerMapper) {
+    public ComputerService(ComputerRepository computerRepository,
+                           WorkspaceRepository workspaceRepository,
+                           ComputerMapper computerMapper) {
         this.computerRepository = computerRepository;
+        this.workspaceRepository = workspaceRepository;
         this.computerMapper = computerMapper;
     }
-
-    /*public ComputerResponse findById(UUID id) {
-        return computerMapper.toInfoResponse(getOrThrow(id));
-    }*/
 
     public List<ComputerResponse> findAll() {
         return computerRepository.findAll().stream().map(computerMapper::toResponse).toList();
     }
 
+    public List<ComputerResponse> findAllByWorkspace(UUID workspaceId) {
+        if (!workspaceRepository.existsById(workspaceId)) {
+            throw new ResourceNotFoundException("Workspace", workspaceId);
+        }
+        return computerRepository.findAllByWorkspaceIdOrderByNameAsc(workspaceId).stream()
+                .map(computerMapper::toResponse)
+                .toList();
+    }
+
+    @Transactional
     public UUID create(ComputerRequest request) {
-        return computerRepository.save(computerMapper.toEntity(request)).getId();
+        Workspace workspace = getWorkspaceOrThrow(request.workspaceId());
+        return computerRepository.save(computerMapper.toEntity(request, workspace)).getId();
     }
 
+    @Transactional
     public void update(UUID id, ComputerRequest request) {
-        computerMapper.applyUpdate(getOrThrow(id), request);
+        Computer computer = getOrThrow(id);
+        computerMapper.applyUpdate(computer, request, getWorkspaceOrThrow(request.workspaceId()));
     }
 
+    @Transactional
     public void partialUpdate(UUID id, ComputerPatchRequest request) {
-        computerMapper.applyPatch(getOrThrow(id), request);
+        Computer computer = getOrThrow(id);
+        Workspace workspace = request.workspaceId() == null
+                ? null : getWorkspaceOrThrow(request.workspaceId());
+        computerMapper.applyPatch(computer, request, workspace);
     }
 
+    @Transactional
     public void delete(UUID id) {
         computerRepository.delete(getOrThrow(id));
     }
 
     private Computer getOrThrow(UUID id) {
-        return computerRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        return computerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Computer", id));
+    }
+
+    private Workspace getWorkspaceOrThrow(UUID id) {
+        return workspaceRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Workspace", id));
     }
 }

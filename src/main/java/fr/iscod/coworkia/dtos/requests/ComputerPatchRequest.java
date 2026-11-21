@@ -1,9 +1,8 @@
 package fr.iscod.coworkia.dtos.requests;
 
-import fr.iscod.coworkia.entities.Workspace;
+import java.util.UUID;
 
 public record ComputerPatchRequest(
         String name,
-        Workspace workspace
-) {
-}
+        UUID workspaceId
+) {}
