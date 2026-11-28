@@ -2,82 +2,52 @@ package fr.iscod.coworkia.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.List;
 
 @Configuration
 public class SecurityConfiguration {
 
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+    SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
 
-        http
+        return http
                 .cors(Customizer.withDefaults())
-
-                .csrf(csrf -> csrf.disable())
-
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                )
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.disable())
+                )
                 .authorizeHttpRequests(auth -> auth
-                        // Autoriser les requêtes preflight CORS
-                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-
                         .requestMatchers("/h2-console/**").permitAll()
-
-                        .requestMatchers(
-                                "/offices",
-                                "/offices/**",
-                                "/workspaces",
-                                "/workspaces/**"
-                        ).authenticated()
-
                         .anyRequest().authenticated()
                 )
-
-                .headers(headers -> headers
-                        .frameOptions(frame -> frame.sameOrigin())
-                )
-
-                .httpBasic(Customizer.withDefaults());
-
-        return http.build();
+                .httpBasic(Customizer.withDefaults())
+                .build();
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:4200"
-        ));
-
-        configuration.setAllowedMethods(List.of(
-                "GET",
-                "POST",
-                "PUT",
-                "PATCH",
-                "DELETE",
-                "OPTIONS"
-        ));
-
-        configuration.setAllowedHeaders(List.of(
-                "Authorization",
-                "Content-Type"
-        ));
-
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
+    BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    AuthenticationManager authenticationManager(
+            BCryptPasswordEncoder encoder,
+            UserDetailsService userDetailsService,
+            HttpSecurity http) throws Exception
+    {
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(encoder);
+        return authenticationManagerBuilder.build();
+    }
+
 }

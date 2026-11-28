@@ -19,7 +19,7 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private InternalUser user;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
     private String status;
@@ -41,11 +41,11 @@ public class Booking {
         this.computer = computer;
     }
 
-    public User getUser() {
+    public InternalUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(InternalUser user) {
         this.user = user;
     }
 
